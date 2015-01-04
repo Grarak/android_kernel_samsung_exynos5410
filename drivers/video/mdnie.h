@@ -43,6 +43,12 @@ enum POWER_LUT {
 	LUT_MAX,
 };
 
+enum NEGATIVE {
+	NEGATIVE_OFF,
+	NEGATIVE_ON,
+	NEGATIVE_MAX,
+};
+
 enum BYPASS {
 	BYPASS_OFF,
 	BYPASS_ON,
@@ -76,6 +82,7 @@ struct mdnie_info {
 	enum CABC cabc;
 	enum BYPASS bypass;
 	unsigned int tuning;
+	unsigned int negative;
 	unsigned int accessibility;
 	unsigned int color_correction;
 	char path[50];
@@ -94,6 +101,8 @@ extern struct mdnie_info *g_mdnie;
 
 int s3c_mdnie_hw_init(void);
 int s3c_mdnie_set_size(void);
+
+void mdnie_update(struct mdnie_info *mdnie, u8 force);
 
 void init_intercept_control(struct kobject *kobj);
 unsigned short mdnie_reg_hook(unsigned short reg, unsigned short value);
